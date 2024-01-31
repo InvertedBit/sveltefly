@@ -1,0 +1,21 @@
+version: "3"
+
+services:
+  external:
+    container_name: external
+    image: sveltefly-dev
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    environment:
+      - NODE_ENV=development
+      - TZ=Europe/Zurich
+    env_file:
+      - .env
+    restart: on-failure
+    ports:
+      - 3000:3000
+      - 24678:24678
+    volumes:
+      - ./:/app
+      - /app/node_modules
